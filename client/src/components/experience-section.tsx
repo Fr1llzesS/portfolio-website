@@ -3,7 +3,7 @@ import SectionBackground from './section-background';
 export default function ExperienceSection() {
   return (
     <section id="experience" className="py-16 relative">
-      <SectionBackground imageSrc="./assets/career.JPG" opacity={0.2} />
+      <SectionBackground imageSrc="/assets/career.jpg" opacity={0.2} />
       
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 gradient-text">

@@ -18,9 +18,20 @@ export default function SectionBackground({
     const img = new Image();
     img.src = imageSrc;
     img.onload = () => setLoaded(true);
+    img.onerror = () => {
+      // В случае ошибки, попробуем альтернативный путь
+      console.log("Не удалось загрузить изображение:", imageSrc);
+    };
   }, [imageSrc]);
   
-  if (!loaded) return null;
+  // Возвращаем только градиентный фон в случае ошибки загрузки
+  if (!loaded) {
+    return (
+      <div className={`absolute inset-0 -z-10 overflow-hidden ${className}`}>
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-800 to-dark-900" />
+      </div>
+    );
+  }
   
   return (
     <motion.div 
@@ -28,7 +39,7 @@ export default function SectionBackground({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      viewport={{ once: true }} // Анимируем только один раз
+      viewport={{ once: true }}
     >
       <div 
         className="w-full h-full bg-cover bg-center"

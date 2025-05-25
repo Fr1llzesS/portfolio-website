@@ -1,119 +1,29 @@
-import { useEffect, useState } from "react";
-import { Card } from "@/components/ui/card";
-import { HardHat, CheckCircle } from "lucide-react";
-import { useLanguage } from "@/contexts/language-context";
+import SectionBackground from './section-background';
 
 export default function ExperienceSection() {
-  const [isVisible, setIsVisible] = useState(false);
-  const { t } = useLanguage();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById('experience');
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const responsibilities = [
-    {
-      text: t('experience.resp1'),
-      color: 'text-secondary-green'
-    },
-    {
-      text: t('experience.resp2'),
-      color: 'text-secondary-green'
-    },
-    {
-      text: t('experience.resp3'),
-      color: 'text-secondary-green'
-    },
-    {
-      text: t('experience.resp4'),
-      color: 'text-secondary-green'
-    },
-    {
-      text: t('experience.resp5'),
-      color: 'text-secondary-green'
-    },
-    {
-      text: t('experience.resp6'),
-      color: 'text-primary-blue'
-    },
-    {
-      text: t('experience.resp7'),
-      color: 'text-primary-blue'
-    },
-    {
-      text: t('experience.resp8'),
-      color: 'text-primary-blue'
-    },
-    {
-      text: t('experience.resp9'),
-      color: 'text-primary-blue'
-    },
-    {
-      text: t('experience.resp10'),
-      color: 'text-primary-blue'
-    },
-  ];
-
   return (
-    <section id="experience" className="py-20 bg-dark">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="gradient-text">{t('experience.title')}</span>
-          </h2>
-          
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-surface p-8 border-slate-700">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary-green rounded-lg flex items-center justify-center">
-                    <HardHat className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-                
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2 text-slate-100">{t('experience.company')}</h3>
-                  <p className="text-secondary-green font-medium mb-2">{t('experience.position')}</p>
-                  <p className="text-muted mb-6">{t('experience.period')}</p>
-                  
-                  <h4 className="font-semibold mb-4 text-slate-100">{t('experience.responsibilities')}</h4>
-                  
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-3">
-                      {responsibilities.slice(0, 5).map((responsibility, index) => (
-                        <div key={index} className="flex items-start space-x-3">
-                          <CheckCircle className={`${responsibility.color} mt-1 flex-shrink-0 w-4 h-4`} />
-                          <span className="text-sm text-slate-300">{responsibility.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="space-y-3">
-                      {responsibilities.slice(5).map((responsibility, index) => (
-                        <div key={index + 5} className="flex items-start space-x-3">
-                          <CheckCircle className={`${responsibility.color} mt-1 flex-shrink-0 w-4 h-4`} />
-                          <span className="text-sm text-slate-300">{responsibility.text}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
+    <section id="experience" className="py-16 relative">
+      <SectionBackground imageSrc="/assets/career.JPG" opacity={0.2} />
+      
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-8 gradient-text">
+          Опыт работы
+        </h2>
+        
+        <div className="bg-surface p-6 rounded-lg shadow-md">
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold">ООО "Кутынская Горно-Геологическая Компания"</h3>
+            <div className="text-sm text-slate-400 mb-2">24.01.2024 - настоящее время</div>
+            <div className="font-medium mb-2">Горнорабочий на маркшейдерских работах 3 разряда</div>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Маркшейдерские работы и вычисления по созданию опорной сети, съемки и замеры горных выработок, камеральную обработку материалов съемок</li>
+              <li>Выполнение привязки проектов горных выработок к условиям местности и перенос их в натуру</li>
+              <li>Маркшейдерское сопровождение БВР/СЭР</li>
+              <li>Ведение производственной и отчетной документации</li>
+              <li>Определение и учет объемов выполненных горных работ</li>
+              <li>Мониторинг и контроль сдвижений горных пород, деформацией зданий и сооружений</li>
+              <li>Обеспечение и контроль соблюдения правил учета и хранения материалов маркшейдерских работ, законодательства в области геологического изучения недр, недропользования, охраны недр и окружающей среды</li>
+            </ul>
           </div>
         </div>
       </div>

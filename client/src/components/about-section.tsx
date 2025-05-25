@@ -11,9 +11,11 @@ import {
   Mail,
   MapPin
 } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,18 +36,18 @@ export default function AboutSection() {
   }, []);
 
   const qualities = [
-    { icon: CheckSquare, label: 'Ответственность', color: 'text-primary-blue' },
-    { icon: Clock, label: 'Пунктуальность', color: 'text-secondary-green' },
-    { icon: Shield, label: 'Стрессоустойчивость', color: 'text-primary-blue' },
-    { icon: Handshake, label: 'Тактичность', color: 'text-secondary-green' },
-    { icon: MessageCircle, label: 'Коммуникабельность', color: 'text-primary-blue' },
-    { icon: Eye, label: 'Внимательность', color: 'text-secondary-green' },
+    { icon: CheckSquare, label: t('about.responsibility'), color: 'text-primary-blue' },
+    { icon: Clock, label: t('about.punctuality'), color: 'text-secondary-green' },
+    { icon: Shield, label: t('about.stress_resistance'), color: 'text-primary-blue' },
+    { icon: Handshake, label: t('about.tact'), color: 'text-secondary-green' },
+    { icon: MessageCircle, label: t('about.communication'), color: 'text-primary-blue' },
+    { icon: Eye, label: t('about.attention'), color: 'text-secondary-green' },
   ];
 
   const languages = [
-    { name: 'Русский', level: 'Родной', color: 'text-secondary-green' },
-    { name: 'Английский', level: 'Advanced C1', color: 'text-primary-blue' },
-    { name: 'Немецкий', level: 'Elementary A1', color: 'text-muted' },
+    { name: t('about.russian'), level: t('about.native'), color: 'text-secondary-green' },
+    { name: t('about.english'), level: t('about.advanced'), color: 'text-primary-blue' },
+    { name: t('about.german'), level: t('about.elementary'), color: 'text-muted' },
   ];
 
   return (
@@ -53,12 +55,12 @@ export default function AboutSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="gradient-text">Обо мне</span>
+            <span className="gradient-text">{t('about.title')}</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-semibold mb-6 text-slate-100">Профессиональные качества</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-slate-100">{t('about.qualities')}</h3>
               <div className="grid grid-cols-2 gap-4">
                 {qualities.map((quality, index) => {
                   const Icon = quality.icon;
@@ -73,7 +75,7 @@ export default function AboutSection() {
             </div>
             
             <div>
-              <h3 className="text-2xl font-semibold mb-6 text-slate-100">Языки</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-slate-100">{t('about.languages')}</h3>
               <div className="space-y-4">
                 {languages.map((language, index) => (
                   <div key={index} className="flex items-center justify-between">
@@ -84,7 +86,7 @@ export default function AboutSection() {
               </div>
               
               <Card className="mt-8 p-6 bg-dark border-slate-700">
-                <h4 className="font-semibold mb-3 text-slate-100">Контактная информация</h4>
+                <h4 className="font-semibold mb-3 text-slate-100">{t('about.contact_info')}</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center text-slate-300">
                     <Phone className="w-4 h-4 text-primary-blue mr-3" />
@@ -96,7 +98,7 @@ export default function AboutSection() {
                   </div>
                   <div className="flex items-center text-slate-300">
                     <MapPin className="w-4 h-4 text-primary-blue mr-3" />
-                    <span>г. Хабаровск</span>
+                    <span>{t('about.location')}</span>
                   </div>
                 </div>
               </Card>

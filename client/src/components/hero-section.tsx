@@ -44,29 +44,29 @@ export default function HeroSection() {
               className="bg-primary hover:bg-blue-600 text-white px-8 py-3"
             >
               <Mail className="w-4 h-4 mr-2" />
-              Связаться со мной
+              {t('hero.contact')}
             </Button>
             <Button 
               variant="outline" 
               className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3"
             >
               <Download className="w-4 h-4 mr-2" />
-              Скачать PDF
+              {t('hero.download')}
             </Button>
           </div>
           
           <div className="flex justify-center space-x-6 mt-8">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-blue">19</div>
-              <div className="text-sm text-muted">лет</div>
+              <div className="text-sm text-muted">{t('hero.age')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-secondary-green">1+</div>
-              <div className="text-sm text-muted">год опыта</div>
+              <div className="text-sm text-muted">{t('hero.experience')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-blue">5.0</div>
-              <div className="text-sm text-muted">средний балл</div>
+              <div className="text-sm text-muted">{t('hero.grade')}</div>
             </div>
           </div>
         </div>

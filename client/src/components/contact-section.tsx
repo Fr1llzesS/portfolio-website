@@ -47,14 +47,14 @@ export default function ContactSection() {
     onSuccess: () => {
       toast({
         title: t('contact.success_title'),
-        description: t('contact.success_description'),
+        description: t('contact.success_message'),
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
     },
     onError: (error: any) => {
       toast({
         title: t('contact.error_title'),
-        description: error.message || t('contact.error_description'),
+        description: error.message || t('contact.error_message'),
         variant: "destructive",
       });
     },
@@ -66,7 +66,7 @@ export default function ContactSection() {
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       toast({
         title: t('contact.validation_title'),
-        description: t('contact.validation_description'),
+        description: t('contact.validation_message'),
         variant: "destructive",
       });
       return;
@@ -114,7 +114,7 @@ export default function ContactSection() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-slate-100">{t('contact.get_in_touch')}</h3>
+              <h3 className="text-xl font-semibold mb-6 text-slate-100">{t('contact.reach_out')}</h3>
               
               <div className="space-y-6">
                 {contactInfo.map((contact, index) => {
@@ -134,62 +134,61 @@ export default function ContactSection() {
               </div>
               
               <Card className="mt-8 p-6 bg-dark border-slate-700">
-                <h4 className="font-semibold mb-3 text-slate-100">Готов к сотрудничеству</h4>
+                <h4 className="font-semibold mb-3 text-slate-100">{t('contact.ready_title')}</h4>
                 <p className="text-slate-300 text-sm">
-                  Открыт для новых возможностей в области маркшейдерского дела и горно-геологических изысканий. 
-                  Готов к командировкам и работе в различных условиях.
+                  {t('contact.ready_description')}
                 </p>
               </Card>
             </div>
             
             {/* Contact Form */}
             <Card className="bg-dark p-6 border-slate-700">
-              <h3 className="text-xl font-semibold mb-6 text-slate-100">Отправить сообщение</h3>
+              <h3 className="text-xl font-semibold mb-6 text-slate-100">{t('contact.send_message')}</h3>
               
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <Label htmlFor="name" className="text-slate-300">Имя</Label>
+                  <Label htmlFor="name" className="text-slate-300">{t('contact.name')}</Label>
                   <Input
                     id="name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    placeholder="Ваше имя"
+                    placeholder={t('contact.name_placeholder')}
                     className="mt-2 bg-surface border-slate-600 text-slate-100 focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="email" className="text-slate-300">Email</Label>
+                  <Label htmlFor="email" className="text-slate-300">{t('contact.email')}</Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    placeholder="your.email@example.com"
+                    placeholder={t('contact.email_placeholder')}
                     className="mt-2 bg-surface border-slate-600 text-slate-100 focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="subject" className="text-slate-300">Тема</Label>
+                  <Label htmlFor="subject" className="text-slate-300">{t('contact.subject')}</Label>
                   <Input
                     id="subject"
                     type="text"
                     value={formData.subject}
                     onChange={(e) => handleInputChange('subject', e.target.value)}
-                    placeholder="Тема сообщения"
+                    placeholder={t('contact.subject_placeholder')}
                     className="mt-2 bg-surface border-slate-600 text-slate-100 focus:border-primary"
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="message" className="text-slate-300">Сообщение</Label>
+                  <Label htmlFor="message" className="text-slate-300">{t('contact.message')}</Label>
                   <Textarea
                     id="message"
                     value={formData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
-                    placeholder="Ваше сообщение..."
+                    placeholder={t('contact.message_placeholder')}
                     rows={5}
                     className="mt-2 bg-surface border-slate-600 text-slate-100 focus:border-primary resize-none"
                   />
@@ -203,12 +202,12 @@ export default function ContactSection() {
                   {contactMutation.isPending ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Отправка...
+                      {t('contact.sending')}
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      Отправить сообщение
+                      {t('contact.submit')}
                     </>
                   )}
                 </Button>

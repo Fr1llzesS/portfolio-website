@@ -7,7 +7,7 @@ export function getAssetPath(path: string): string {
   
   // На GitHub Pages используем базовый путь
   if (isGitHubPages) {
-    return `/portfolio-website${path}`;
+    return `./portfolio-website${path}`;
   }
   // В разработке используем обычные пути
   return path;

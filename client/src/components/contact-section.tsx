@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { Phone, Mail, MapPin, Send, Loader2 } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function ContactSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,6 +19,7 @@ export default function ContactSection() {
     message: ''
   });
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,15 +46,15 @@ export default function ContactSection() {
     },
     onSuccess: () => {
       toast({
-        title: "Сообщение отправлено!",
-        description: "Спасибо за ваше сообщение. Я свяжусь с вами в ближайшее время.",
+        title: t('contact.success_title'),
+        description: t('contact.success_description'),
       });
       setFormData({ name: '', email: '', subject: '', message: '' });
     },
     onError: (error: any) => {
       toast({
-        title: "Ошибка отправки",
-        description: error.message || "Произошла ошибка при отправке сообщения. Попробуйте еще раз.",
+        title: t('contact.error_title'),
+        description: error.message || t('contact.error_description'),
         variant: "destructive",
       });
     },
@@ -63,8 +65,8 @@ export default function ContactSection() {
     
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       toast({
-        title: "Заполните все поля",
-        description: "Пожалуйста, заполните все обязательные поля формы.",
+        title: t('contact.validation_title'),
+        description: t('contact.validation_description'),
         variant: "destructive",
       });
       return;
@@ -80,21 +82,21 @@ export default function ContactSection() {
   const contactInfo = [
     {
       icon: Phone,
-      label: 'Телефон',
+      label: t('contact.phone'),
       value: '+7 (924) 100-55-42',
       bgColor: 'bg-primary/20',
       iconColor: 'text-primary-blue'
     },
     {
       icon: Mail,
-      label: 'Email',
+      label: t('contact.email'),
       value: 'vkurdumov15@gmail.com',
       bgColor: 'bg-secondary-green/20',
       iconColor: 'text-secondary-green'
     },
     {
       icon: MapPin,
-      label: 'Местоположение',
+      label: t('contact.location'),
       value: 'г. Хабаровск',
       bgColor: 'bg-primary/20',
       iconColor: 'text-primary-blue'
@@ -106,13 +108,13 @@ export default function ContactSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="gradient-text">Контакты</span>
+            <span className="gradient-text">{t('contact.title')}</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-slate-100">Свяжитесь со мной</h3>
+              <h3 className="text-xl font-semibold mb-6 text-slate-100">{t('contact.get_in_touch')}</h3>
               
               <div className="space-y-6">
                 {contactInfo.map((contact, index) => {

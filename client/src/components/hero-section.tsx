@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setIsVisible(true);
@@ -30,10 +32,10 @@ export default function HeroSection() {
             <span className="text-slate-300">Борисович</span>
           </h1>
           
-          <h2 className="text-xl md:text-2xl font-mono text-muted mb-6">Маркшейдер</h2>
+          <h2 className="text-xl md:text-2xl font-mono text-muted mb-6">{t('hero.position')}</h2>
           
           <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Горный инженер-маркшейдер с опытом работы 1.5 года в области маркшейдерского обеспечения горных работ
+            {t('hero.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

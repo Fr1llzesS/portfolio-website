@@ -38,12 +38,12 @@ export default function Navigation() {
   };
 
   const navItems = [
-    { id: 'hero', label: 'Главная' },
-    { id: 'about', label: 'Обо мне' },
-    { id: 'education', label: 'Образование' },
-    { id: 'skills', label: 'Навыки' },
-    { id: 'experience', label: 'Опыт' },
-    { id: 'contact', label: 'Контакты' },
+    { id: 'hero', label: t('nav.home') },
+    { id: 'about', label: t('nav.about') },
+    { id: 'education', label: t('nav.education') },
+    { id: 'skills', label: t('nav.skills') },
+    { id: 'experience', label: t('nav.experience') },
+    { id: 'contact', label: t('nav.contact') },
   ];
 
   return (
@@ -68,11 +68,13 @@ export default function Navigation() {
                   {item.label}
                 </button>
               ))}
+              <LanguageSwitcher />
             </div>
           </div>
           
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            <LanguageSwitcher />
             <Button
               variant="ghost"
               size="icon"

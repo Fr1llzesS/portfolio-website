@@ -1,37 +1,38 @@
-import { ReactNode, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef, ReactNode } from 'react';
 
 interface AnimatedSectionProps {
+  id: string;
   children: ReactNode;
-  delay?: number;
   className?: string;
 }
 
-export function AnimatedSection({ 
-  children, 
-  delay = 0, 
-  className = "" 
-}: AnimatedSectionProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { 
-    once: true, 
-    amount: 0.2,
-    margin: "0px 0px -100px 0px"
+export default function AnimatedSection({ id, children, className = "py-16" }: AnimatedSectionProps) {
+  const sectionRef = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
   });
-
+  
+  // Более плавная анимация для любого движения по странице
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [30, 0, 0, -30]);
+  
+  // Применяем spring для еще более плавной анимации
+  const smoothY = useSpring(y, { stiffness: 50, damping: 15 });
+  const smoothOpacity = useSpring(opacity, { stiffness: 50, damping: 15 });
+  
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-      transition={{ 
-        duration: 0.7, 
-        ease: "easeOut", 
-        delay: delay 
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+    <section id={id} ref={sectionRef} className={className}>
+      <motion.div
+        style={{ 
+          opacity: smoothOpacity,
+          y: smoothY,
+        }}
+      >
+        {children}
+      </motion.div>
+    </section>
   );
 }

@@ -16,6 +16,7 @@ export default defineConfig({
         ]
       : []),
   ],
+  base: '/portfolio-website/', // Добавлен базовый путь для GitHub Pages
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

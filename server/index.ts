@@ -4,6 +4,9 @@ import { setupVite, serveStatic, log } from "./vite";
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Serve static assets
+app.use('/assets', express.static('assets'));
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -41,8 +44,8 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
-  const port = process.env.PORT || 3000;
-  server.listen(port, "localhost", () => {
+  const port = process.env.PORT || 5000;
+  server.listen(port, "0.0.0.0", () => {
     log(`serving on port ${port}`);
   });
 })();

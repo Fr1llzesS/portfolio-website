@@ -13,32 +13,33 @@ import AnimatedBackground from "@/components/animated-background";
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-dark text-slate-50 relative">
-      {/* Анимированный фон для всей страницы */}
-      <AnimatedBackground />
+      {/* Анимированный фон для героя секции */}
+      <div className="absolute inset-0 z-0 h-screen overflow-hidden">
+        <AnimatedBackground />
+      </div>
       
       <Navigation />
       
-      {/* Главная секция без обертки для плавной анимации, так как у нее уже есть свой стиль */}
+      {/* Основные секции */}
       <HeroSection />
       
-      {/* Обертываем каждую секцию в AnimatedSection для плавной анимации */}
-      <AnimatedSection id="about">
+      <AnimatedSection>
         <AboutSection />
       </AnimatedSection>
       
-      <AnimatedSection id="education">
+      <AnimatedSection>
         <EducationSection />
       </AnimatedSection>
       
-      <AnimatedSection id="skills">
+      <AnimatedSection>
         <SkillsSection />
       </AnimatedSection>
       
-      <AnimatedSection id="experience">
+      <AnimatedSection>
         <ExperienceSection />
       </AnimatedSection>
       
-      <AnimatedSection id="contact">
+      <AnimatedSection>
         <ContactSection />
       </AnimatedSection>
       

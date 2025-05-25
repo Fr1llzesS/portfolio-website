@@ -1,10 +1,7 @@
-import { useEffect, useRef } from "react";
-import { useLanguage } from "@/contexts/language-context";
+import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 function Portfolio() {
-  const { t } = useLanguage();
-  
   // Используем useRef для основных секций
   const aboutRef = useRef(null);
   const experienceRef = useRef(null);
@@ -57,7 +54,7 @@ function Portfolio() {
         {/* Здесь вставьте ваш оригинальный код секции "Обо мне" */}
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 gradient-text">
-            {t('sections.about.title')}
+            О себе
           </h2>
           
           <div className="bg-surface p-6 rounded-lg shadow-md">
@@ -75,7 +72,7 @@ function Portfolio() {
         {/* Здесь вставьте ваш оригинальный код секции "Опыт работы" */}
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 gradient-text">
-            {t('sections.experience.title')}
+            Опыт работы
           </h2>
           
           <div className="bg-surface p-6 rounded-lg shadow-md">
@@ -101,7 +98,7 @@ function Portfolio() {
         {/* Здесь вставьте ваш оригинальный код секции "Образование" */}
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 gradient-text">
-            {t('sections.education.title')}
+            Образование
           </h2>
           
           <div className="bg-surface p-6 rounded-lg shadow-md mb-8">
@@ -130,7 +127,7 @@ function Portfolio() {
         {/* Здесь вставьте ваш оригинальный код секции "Навыки" */}
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 gradient-text">
-            {t('sections.skills.title')}
+            Навыки
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -159,7 +156,7 @@ function Portfolio() {
         {/* Здесь вставьте ваш оригинальный код секции "Контакты" */}
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 gradient-text">
-            {t('sections.contact.title')}
+            Контакты
           </h2>
           
           <div className="bg-surface p-6 rounded-lg shadow-md">
@@ -346,7 +343,7 @@ function SkillBar({ name, level }) {
       <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
         <motion.div 
           className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full"
-          style={{ width: smoothWidth.interpolate(v => `${v}%`) }}
+          style={{ width: smoothWidth }}
         />
       </div>
     </div>

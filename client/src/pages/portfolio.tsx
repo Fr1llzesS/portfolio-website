@@ -13,7 +13,7 @@ import AnimatedBackground from "@/components/animated-background";
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-dark text-slate-50 relative">
-      {/* Анимированный фон для героя секции */}
+      {/* Анимированный фон только для первого экрана */}
       <div className="absolute inset-0 z-0 h-screen overflow-hidden">
         <AnimatedBackground />
       </div>
@@ -47,6 +47,7 @@ export default function Portfolio() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
       >
         <Footer />
       </motion.div>

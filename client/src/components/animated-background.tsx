@@ -5,17 +5,19 @@ export default function AnimatedBackground() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
     let width = window.innerWidth;
     let height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
 
-    // Настройки анимации
-    const particleCount = 50;
+    // Уменьшаем количество частиц
+    const particleCount = 20; // было 50
     const particles = [];
-    const connectionDistance = 150;
-    const moveSpeed = 0.5;
+    const connectionDistance = 120; // было 150
+    const moveSpeed = 0.3; // было 0.5
 
     // Создаем частицы
     for (let i = 0; i < particleCount; i++) {
@@ -28,6 +30,8 @@ export default function AnimatedBackground() {
       });
     }
 
+    let animationFrameId;
+    
     function animate() {
       ctx.clearRect(0, 0, width, height);
       
@@ -47,9 +51,10 @@ export default function AnimatedBackground() {
         ctx.fill();
       });
       
-      // Рисуем соединения между близкими частицами
+      // Оптимизируем рисование соединений
       for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
+        // Рисуем соединения только с ближайшими частицами
+        for (let j = i + 1; j < Math.min(i + 5, particles.length); j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -58,14 +63,14 @@ export default function AnimatedBackground() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 * (1 - distance / connectionDistance)})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * (1 - distance / connectionDistance)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
       
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     }
     
     animate();
@@ -82,6 +87,7 @@ export default function AnimatedBackground() {
     
     return () => {
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
   

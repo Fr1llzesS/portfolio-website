@@ -1,168 +1,112 @@
-import { useEffect, useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
-import { Settings, TrendingUp } from "lucide-react";
-import { useLanguage } from "@/contexts/language-context";
+import SectionBackground from './section-background';
 
 export default function SkillsSection() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [progressValues, setProgressValues] = useState<{ [key: string]: number }>({});
-  const { t } = useLanguage();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Animate progress bars
-          setTimeout(() => {
-            setProgressValues({
-              'tacheometers': 90,
-              'metashape': 85,
-              'datamine': 80,
-              'autocad': 85,
-              'civil3d': 75,
-              'office': 95,
-            });
-          }, 200);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById('skills');
-    if (element) {
-      observer.observe(element);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const technicalSkills = [
-    { 
-      key: 'tacheometers',
-      name: 'Тахеометры/GNSS/Сканеры/Дроны', 
-      level: t('skills.confident'),
-      progress: 90,
-      squares: 4
-    },
-    { 
-      key: 'metashape',
-      name: 'Agisoft Metashape', 
-      level: t('skills.advanced'),
-      progress: 85,
-      squares: 4
-    },
-    { 
-      key: 'datamine',
-      name: 'Datamine Studio RM', 
-      level: t('skills.advanced'),
-      progress: 85,
-      squares: 4
-    },
-    { 
-      key: 'autocad',
-      name: 'Autodesk AutoCAD', 
-      level: t('skills.advanced'),
-      progress: 85,
-      squares: 4
-    },
-    { 
-      key: 'civil3d',
-      name: 'Autodesk Civil 3D', 
-      level: t('skills.advanced'),
-      progress: 85,
-      squares: 4
-    },
-    { 
-      key: 'office',
-      name: 'Microsoft Office (Word, Excel, PP)', 
-      level: t('skills.expert'),
-      progress: 95,
-      squares: 5
-    },
-  ];
-
-  const academicSubjects = [
-    t('skills.surveying_support'),
-    t('skills.geological_worker'),
-    t('skills.geology'),
-    t('skills.practice'),
-    t('skills.topographic'),
-    t('skills.engineering_graphics'),
-    t('skills.technical_mechanics'),
-  ];
-
   return (
-    <section id="skills" className="py-20 bg-surface">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="gradient-text">{t('skills.title')}</span>
-          </h2>
+    <section id="skills" className="py-16 relative">
+      <SectionBackground imageSrc="./assets/ksd.jpg" opacity={0.15} />
+      
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-8 gradient-text">
+          Навыки
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-surface p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-4">Профессиональные навыки</h3>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Тахеометры/GNSS/Сканеры/Дроны</span>
+                <span>90%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '90%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Ведение горно-граф. документации</span>
+                <span>85%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '85%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Agiso Metashape</span>
+                <span>80%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '80%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Datamine Studio RM</span>
+                <span>75%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '75%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Autodesk Autocad</span>
+                <span>85%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '85%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Autodesk Civil 3D</span>
+                <span>80%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '80%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Microsoft Office (Word, Excel, PP)</span>
+                <span>90%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '90%' }}></div>
+              </div>
+            </div>
+          </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Technical Skills */}
-            <Card className="bg-dark p-6 border-slate-700">
-              <h3 className="text-xl font-semibold mb-6 text-slate-100 flex items-center">
-                <Settings className="w-5 h-5 text-primary-blue mr-2" />
-                {t('skills.technical')}
-              </h3>
-              
-              <div className="space-y-6">
-                {technicalSkills.map((skill) => (
-                  <div key={skill.key} className="skill-item">
-                    <div className="flex justify-between mb-3">
-                      <span className="font-medium text-slate-100">{skill.name}</span>
-                      <span className="text-secondary-green font-mono text-sm">{skill.level}</span>
-                    </div>
-                    
-                    {/* Skill squares */}
-                    <div className="flex items-center space-x-2 mb-2">
-                      {Array.from({ length: 5 }, (_, index) => (
-                        <div
-                          key={index}
-                          className={`w-4 h-4 border-2 border-primary-blue ${
-                            index < skill.squares 
-                              ? 'bg-primary-blue' 
-                              : 'bg-transparent'
-                          } transition-all duration-500`}
-                          style={{
-                            transitionDelay: `${index * 100}ms`
-                          }}
-                        />
-                      ))}
-                      <span className="text-xs text-slate-400 ml-2">
-                        {skill.squares}/5
-                      </span>
-                    </div>
-                    
-                    <Progress 
-                      value={progressValues[skill.key] || 0} 
-                      className="h-2"
-                    />
-                  </div>
-                ))}
+          <div className="bg-surface p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-4">Языки</h3>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Русский (Родной)</span>
+                <span>100%</span>
               </div>
-            </Card>
-            
-            {/* Academic Performance */}
-            <Card className="bg-dark p-6 border-slate-700">
-              <h3 className="text-xl font-semibold mb-6 text-slate-100 flex items-center">
-                <TrendingUp className="w-5 h-5 text-secondary-green mr-2" />
-                {t('skills.academic')}
-              </h3>
-              
-              <div className="space-y-3">
-                {academicSubjects.map((subject, index) => (
-                  <div key={index} className="flex justify-between items-center p-3 bg-surface rounded-lg border border-slate-700">
-                    <span className="font-medium text-slate-100 text-sm">{subject}</span>
-                    <Badge className="bg-secondary-green text-white font-bold">5</Badge>
-                  </div>
-                ))}
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '100%' }}></div>
               </div>
-            </Card>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Английский (Advanced C1)</span>
+                <span>85%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '85%' }}></div>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between mb-1">
+                <span>Немецкий (Elementary A1)</span>
+                <span>40%</span>
+              </div>
+              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '40%' }}></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

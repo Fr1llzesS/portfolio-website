@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { HardHat, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function ExperienceSection() {
   const [isVisible, setIsVisible] = useState(false);

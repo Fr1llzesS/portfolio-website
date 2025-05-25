@@ -3,10 +3,12 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Settings, TrendingUp } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function SkillsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [progressValues, setProgressValues] = useState<{ [key: string]: number }>({});
+  const { t } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,55 +43,55 @@ export default function SkillsSection() {
     { 
       key: 'tacheometers',
       name: 'Тахеометры/GNSS/Сканеры/Дроны', 
-      level: 'Уверенный',
+      level: t('skills.confident'),
       progress: 90,
       squares: 4
     },
     { 
       key: 'metashape',
       name: 'Agisoft Metashape', 
-      level: 'Продвинутый',
+      level: t('skills.advanced'),
       progress: 85,
       squares: 4
     },
     { 
       key: 'datamine',
       name: 'Datamine Studio RM', 
-      level: 'Продвинутый',
+      level: t('skills.advanced'),
       progress: 85,
       squares: 4
     },
     { 
       key: 'autocad',
       name: 'Autodesk AutoCAD', 
-      level: 'Продвинутый',
+      level: t('skills.advanced'),
       progress: 85,
       squares: 4
     },
     { 
       key: 'civil3d',
       name: 'Autodesk Civil 3D', 
-      level: 'Продвинутый',
+      level: t('skills.advanced'),
       progress: 85,
       squares: 4
     },
     { 
       key: 'office',
       name: 'Microsoft Office (Word, Excel, PP)', 
-      level: 'Эксперт',
+      level: t('skills.expert'),
       progress: 95,
       squares: 5
     },
   ];
 
   const academicSubjects = [
-    'Маркшейдерское обеспечение ведения горных работ',
-    'Горнорабочий на геологических работах',
-    'Геология',
-    'Учебная практика (все виды)',
-    'Топографо-геодезические изыскания',
-    'Инженерная графика',
-    'Техническая механика',
+    t('skills.surveying_support'),
+    t('skills.geological_worker'),
+    t('skills.geology'),
+    t('skills.practice'),
+    t('skills.topographic'),
+    t('skills.engineering_graphics'),
+    t('skills.technical_mechanics'),
   ];
 
   return (
@@ -97,7 +99,7 @@ export default function SkillsSection() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            <span className="gradient-text">Профессиональные навыки</span>
+            <span className="gradient-text">{t('skills.title')}</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8">
@@ -105,7 +107,7 @@ export default function SkillsSection() {
             <Card className="bg-dark p-6 border-slate-700">
               <h3 className="text-xl font-semibold mb-6 text-slate-100 flex items-center">
                 <Settings className="w-5 h-5 text-primary-blue mr-2" />
-                Технические навыки
+                {t('skills.technical')}
               </h3>
               
               <div className="space-y-6">
@@ -149,7 +151,7 @@ export default function SkillsSection() {
             <Card className="bg-dark p-6 border-slate-700">
               <h3 className="text-xl font-semibold mb-6 text-slate-100 flex items-center">
                 <TrendingUp className="w-5 h-5 text-secondary-green mr-2" />
-                Академические достижения
+                {t('skills.academic')}
               </h3>
               
               <div className="space-y-3">

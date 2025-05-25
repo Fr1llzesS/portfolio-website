@@ -1,10 +1,41 @@
-import type { Express } from "express";
+import { type Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactMessageSchema } from "@shared/schema";
 import { z } from "zod";
+import path from "path";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Обработка запросов на файлы из директории portfolio-website/assets
+  app.use('/portfolio-website/assets', (req, res, next) => {
+    console.log('Запрос на файл:', req.path);
+    const filePath = path.join(process.cwd(), 'portfolio-website/assets', req.path);
+    console.log('Полный путь к файлу:', filePath);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        console.log('Ошибка при отправке файла:', err);
+        next();
+      } else {
+        console.log('Файл успешно отправлен');
+      }
+    });
+  });
+  
+  // Для обеспечения обратной совместимости добавим маршрут для файлов без префикса
+  app.use('/assets', (req, res, next) => {
+    console.log('Запрос на файл без префикса:', req.path);
+    const filePath = path.join(process.cwd(), 'portfolio-website/assets', req.path);
+    console.log('Полный путь к файлу:', filePath);
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        console.log('Ошибка при отправке файла:', err);
+        next();
+      } else {
+        console.log('Файл успешно отправлен');
+      }
+    });
+  });
+  
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {

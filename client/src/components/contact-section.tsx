@@ -134,9 +134,9 @@ export default function ContactSection() {
               </div>
               
               <Card className="mt-8 p-6 bg-dark border-slate-700">
-                <h4 className="font-semibold mb-3 text-slate-100">{t('contact.ready_title')}</h4>
+                <h4 className="font-semibold mb-3 text-slate-100">{t('contact.ready')}</h4>
                 <p className="text-slate-300 text-sm">
-                  {t('contact.ready_description')}
+                  {t('contact.description')}
                 </p>
               </Card>
             </div>
@@ -207,7 +207,7 @@ export default function ContactSection() {
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      {t('contact.submit')}
+                      {t('contact.send')}
                     </>
                   )}
                 </Button>

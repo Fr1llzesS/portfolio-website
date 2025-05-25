@@ -59,8 +59,8 @@ export default function HeroSection() {
               <div className="text-sm text-muted">лет</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-secondary-green">1.5</div>
-              <div className="text-sm text-muted">года опыта</div>
+              <div className="text-2xl font-bold text-secondary-green">1+</div>
+              <div className="text-sm text-muted">год опыта</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-blue">5.0</div>

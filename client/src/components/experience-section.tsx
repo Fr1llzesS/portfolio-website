@@ -85,8 +85,8 @@ export default function ExperienceSection() {
                 
                 <div className="flex-1">
                   <h3 className="text-xl font-semibold mb-2 text-slate-100">ООО "Кутынская Горно-Геологическая Компания"</h3>
-                  <p className="text-secondary-green font-medium mb-2">Горнорабочий на маркшейдерских работах 3 разряда / ВРИО Уч. Маркшейдера</p>
-                  <p className="text-muted mb-6">1.5 года</p>
+                  <p className="text-secondary-green font-medium mb-2">Горнорабочий на маркшейдерских работах 3 разряда</p>
+                  <p className="text-muted mb-6">24.01.2024 - настоящее время (1+ год)</p>
                   
                   <h4 className="font-semibold mb-4 text-slate-100">Основные обязанности и достижения:</h4>
                   

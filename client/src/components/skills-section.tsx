@@ -42,37 +42,43 @@ export default function SkillsSection() {
       key: 'tacheometers',
       name: 'Тахеометры/GNSS/Сканеры/Дроны', 
       level: 'Уверенный',
-      progress: 90 
+      progress: 90,
+      squares: 4
     },
     { 
       key: 'metashape',
-      name: 'Agiso Metashape', 
+      name: 'Agisoft Metashape', 
       level: 'Продвинутый',
-      progress: 85 
+      progress: 85,
+      squares: 4
     },
     { 
       key: 'datamine',
       name: 'Datamine Studio RM', 
       level: 'Продвинутый',
-      progress: 80 
+      progress: 85,
+      squares: 4
     },
     { 
       key: 'autocad',
       name: 'Autodesk AutoCAD', 
       level: 'Продвинутый',
-      progress: 85 
+      progress: 85,
+      squares: 4
     },
     { 
       key: 'civil3d',
       name: 'Autodesk Civil 3D', 
-      level: 'Уверенный',
-      progress: 75 
+      level: 'Продвинутый',
+      progress: 85,
+      squares: 4
     },
     { 
       key: 'office',
       name: 'Microsoft Office (Word, Excel, PP)', 
       level: 'Эксперт',
-      progress: 95 
+      progress: 95,
+      squares: 5
     },
   ];
 
@@ -105,10 +111,31 @@ export default function SkillsSection() {
               <div className="space-y-6">
                 {technicalSkills.map((skill) => (
                   <div key={skill.key} className="skill-item">
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between mb-3">
                       <span className="font-medium text-slate-100">{skill.name}</span>
                       <span className="text-secondary-green font-mono text-sm">{skill.level}</span>
                     </div>
+                    
+                    {/* Skill squares */}
+                    <div className="flex items-center space-x-2 mb-2">
+                      {Array.from({ length: 5 }, (_, index) => (
+                        <div
+                          key={index}
+                          className={`w-4 h-4 border-2 border-primary-blue ${
+                            index < skill.squares 
+                              ? 'bg-primary-blue' 
+                              : 'bg-transparent'
+                          } transition-all duration-500`}
+                          style={{
+                            transitionDelay: `${index * 100}ms`
+                          }}
+                        />
+                      ))}
+                      <span className="text-xs text-slate-400 ml-2">
+                        {skill.squares}/5
+                      </span>
+                    </div>
+                    
                     <Progress 
                       value={progressValues[skill.key] || 0} 
                       className="h-2"

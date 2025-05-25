@@ -4,7 +4,7 @@ import { getAssetPath } from '../lib/paths';
 export default function ExperienceSection() {
   return (
     <section id="experience" className="py-16 relative">
-      <SectionBackground imageSrc={getAssetPath("/assets/Career.JPG")} opacity={0.2} />
+      <SectionBackground imageSrc={getAssetPath("/assets/expsection.JPG")} opacity={0.2} />
       
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 gradient-text">

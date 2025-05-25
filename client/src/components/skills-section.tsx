@@ -4,7 +4,7 @@ import { getAssetPath } from '../lib/paths';
 export default function SkillsSection() {
   return (
     <section id="skills" className="py-16 relative">
-     <SectionBackground imageSrc={getAssetPath("/assets/ksd.jpg")} opacity={0.15} />
+     <SectionBackground imageSrc={getAssetPath("/assets/skillsection.jpg")} opacity={0.15} />
       
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 gradient-text">

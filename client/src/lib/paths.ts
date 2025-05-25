@@ -2,12 +2,13 @@
 export function getAssetPath(path: string): string {
   // Проверяем, находимся ли мы на GitHub Pages
   const isGitHubPages = typeof window !== 'undefined' && 
-    window.location.hostname === 'fr1llzess.github.io';
+    (window.location.hostname === 'fr1llzess.github.io' || 
+     window.location.href.includes('github.io'));
   
   // На GitHub Pages используем базовый путь
   if (isGitHubPages) {
     return `/portfolio-website${path}`;
   }
-  // В разработке и других окружениях используем обычные пути
+  // В разработке используем обычные пути
   return path;
 }

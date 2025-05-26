@@ -14,36 +14,94 @@ export default function SectionBackground({
 }: SectionBackgroundProps) {
   const [showImage, setShowImage] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
-  const hasBeenShown = useRef(false);
+  const hasBeenActivated = useRef(false);
+  const isCurrentlyInSection = useRef(false);
+  const hideTimeout = useRef<NodeJS.Timeout | null>(null);
   
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Показываем изображение когда секция становится видимой
-        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-          setShowImage(true);
-          hasBeenShown.current = true;
+    const checkIfInSection = () => {
+      if (!elementRef.current) return false;
+      
+      const section = elementRef.current.closest('section');
+      if (!section) return false;
+      
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Секция считается активной, если любая её часть видна в viewport
+      const isVisible = rect.top < viewportHeight && rect.bottom > 0;
+      
+      // Дополнительная проверка: секция занимает больше 20% экрана
+      const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+      const isSignificantlyVisible = visibleHeight > viewportHeight * 0.2;
+      
+      return isVisible && isSignificantlyVisible;
+    };
+    
+    const handleScroll = () => {
+      const inSection = checkIfInSection();
+      
+      if (inSection) {
+        // Пользователь в секции
+        isCurrentlyInSection.current = true;
+        hasBeenActivated.current = true;
+        setShowImage(true);
+        
+        // Отменяем таймер скрытия, если он был запущен
+        if (hideTimeout.current) {
+          clearTimeout(hideTimeout.current);
+          hideTimeout.current = null;
         }
-      },
-      { 
-        threshold: [0.1, 0.3, 0.5], // Множественные пороги
-        rootMargin: '0px' // Без дополнительных отступов
+      } else if (hasBeenActivated.current && isCurrentlyInSection.current) {
+        // Пользователь покинул секцию, но изображение уже показывалось
+        isCurrentlyInSection.current = false;
+        
+        // Запускаем таймер на 7 секунд
+        if (hideTimeout.current) {
+          clearTimeout(hideTimeout.current);
+        }
+        
+        hideTimeout.current = setTimeout(() => {
+          // Дополнительная проверка перед скрытием
+          if (!checkIfInSection()) {
+            setShowImage(false);
+          }
+          hideTimeout.current = null;
+        }, 7000);
       }
-    );
-
-    // Наблюдаем за родительской секцией
-    const parentSection = elementRef.current?.closest('section');
-    if (parentSection) {
-      observer.observe(parentSection);
-    }
-
-    return () => observer.disconnect();
+    };
+    
+    // Первоначальная проверка
+    handleScroll();
+    
+    // Слушаем прокрутку с throttling
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (hideTimeout.current) {
+        clearTimeout(hideTimeout.current);
+      }
+    };
   }, []);
   
-  // Отдельная логика для предотвращения исчезновения
+  // Дополнительная защита от исчезновения
   useEffect(() => {
-    // Если изображение уже было показано, принудительно оставляем его видимым
-    if (hasBeenShown.current) {
+    if (hasBeenActivated.current && isCurrentlyInSection.current && !showImage) {
+      // Если изображение должно быть видно, но по какой-то причине скрылось
       setShowImage(true);
     }
   }, [showImage]);
@@ -55,10 +113,6 @@ export default function SectionBackground({
       initial={{ opacity: 0 }}
       animate={{ opacity: showImage ? 1 : 0 }}
       transition={{ duration: 0.8 }}
-      style={{ 
-        // Принудительно сохраняем изображение в DOM
-        visibility: showImage ? 'visible' : 'hidden'
-      }}
     >
       <div 
         className="w-full h-full bg-cover bg-center"

@@ -29,6 +29,7 @@ export default function SectionBackground({
         if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
           setShowImage(true);
           hasShown.current = true;
+		  observer.disconnect(); // Отключаем после первого показа
         }
       },
       {

@@ -14,12 +14,10 @@ export default function SectionBackground({
 }: SectionBackgroundProps) {
   const [showImage, setShowImage] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
-  const hasBeenActivated = useRef(false);
-  const isCurrentlyInSection = useRef(false);
-  const hideTimeout = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   useEffect(() => {
-    const checkIfInSection = () => {
+    const checkSectionVisibility = () => {
       if (!elementRef.current) return false;
       
       const section = elementRef.current.closest('section');
@@ -28,82 +26,65 @@ export default function SectionBackground({
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       
-      // Секция считается активной, если любая её часть видна в viewport
-      const isVisible = rect.top < viewportHeight && rect.bottom > 0;
+      // Вычисляем, какая часть секции видна
+      const visibleTop = Math.max(0, rect.top);
+      const visibleBottom = Math.min(viewportHeight, rect.bottom);
+      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+      const sectionHeight = rect.height;
       
-      // Дополнительная проверка: секция занимает больше 20% экрана
-      const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-      const isSignificantlyVisible = visibleHeight > viewportHeight * 0.2;
+      // Процент видимой части секции
+      const visibilityPercentage = (visibleHeight / sectionHeight) * 100;
       
-      return isVisible && isSignificantlyVisible;
+      return visibilityPercentage >= 40;
     };
     
-    const handleScroll = () => {
-      const inSection = checkIfInSection();
+    const handleVisibilityChange = () => {
+      const isVisible = checkSectionVisibility();
       
-      if (inSection) {
-        // Пользователь в секции
-        isCurrentlyInSection.current = true;
-        hasBeenActivated.current = true;
+      if (isVisible) {
+        // Секция видна на 40% или больше - показываем изображение
         setShowImage(true);
         
         // Отменяем таймер скрытия, если он был запущен
-        if (hideTimeout.current) {
-          clearTimeout(hideTimeout.current);
-          hideTimeout.current = null;
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+          hideTimeoutRef.current = null;
         }
-      } else if (hasBeenActivated.current && isCurrentlyInSection.current) {
-        // Пользователь покинул секцию, но изображение уже показывалось
-        isCurrentlyInSection.current = false;
-        
-        // Запускаем таймер на 7 секунд
-        if (hideTimeout.current) {
-          clearTimeout(hideTimeout.current);
+      } else {
+        // Секция видна меньше чем на 40% - запускаем таймер скрытия на 7 секунд
+        if (showImage && !hideTimeoutRef.current) {
+          hideTimeoutRef.current = setTimeout(() => {
+            // Дополнительная проверка перед скрытием
+            if (!checkSectionVisibility()) {
+              setShowImage(false);
+            }
+            hideTimeoutRef.current = null;
+          }, 7000);
         }
-        
-        hideTimeout.current = setTimeout(() => {
-          // Дополнительная проверка перед скрытием
-          if (!checkIfInSection()) {
-            setShowImage(false);
-          }
-          hideTimeout.current = null;
-        }, 7000);
       }
     };
     
     // Первоначальная проверка
-    handleScroll();
+    handleVisibilityChange();
     
-    // Слушаем прокрутку с throttling
-    let ticking = false;
-    const throttledScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
+    // Оптимизированное отслеживание прокрутки
+    let animationFrameId: number;
+    const throttledCheck = () => {
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(handleVisibilityChange);
     };
     
-    window.addEventListener('scroll', throttledScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    window.addEventListener('scroll', throttledCheck, { passive: true });
+    window.addEventListener('resize', throttledCheck, { passive: true });
     
     return () => {
-      window.removeEventListener('scroll', throttledScroll);
-      window.removeEventListener('resize', handleScroll);
-      if (hideTimeout.current) {
-        clearTimeout(hideTimeout.current);
+      window.removeEventListener('scroll', throttledCheck);
+      window.removeEventListener('resize', throttledCheck);
+      cancelAnimationFrame(animationFrameId);
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
       }
     };
-  }, []);
-  
-  // Дополнительная защита от исчезновения
-  useEffect(() => {
-    if (hasBeenActivated.current && isCurrentlyInSection.current && !showImage) {
-      // Если изображение должно быть видно, но по какой-то причине скрылось
-      setShowImage(true);
-    }
   }, [showImage]);
   
   return (

@@ -12,7 +12,7 @@ export default function SectionBackground({
   opacity = 0.1, 
   className = "" 
 }: SectionBackgroundProps) {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   
   useEffect(() => {
     const img = new Image();
@@ -24,14 +24,6 @@ export default function SectionBackground({
     };
   }, [imageSrc]);
   
-  // Возвращаем только градиентный фон в случае ошибки загрузки
-  if (!loaded) {
-    return (
-      <div className={`absolute inset-0 -z-10 overflow-hidden ${className}`}>
-        <div className="absolute inset-0 bg-gradient-to-b from-dark-800 to-dark-900" />
-      </div>
-    );
-  }
   
   return (
     <motion.div 
@@ -39,7 +31,7 @@ export default function SectionBackground({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: false }} // чтобы анимация не исчезала
     >
       <div 
         className="w-full h-full bg-cover bg-center"

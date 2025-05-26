@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
+import resumePDF from "@/assets/documents/resume.pdf?url";
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,6 +17,15 @@ export default function HeroSection() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleDownloadPDF = () => {
+    const link = document.createElement("a");
+    link.href = resumePDF;
+    link.download = "Kurdjumov_Vjacheslav_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -47,6 +57,7 @@ export default function HeroSection() {
               {t('hero.contact')}
             </Button>
             <Button 
+              onClick={handleDownloadPDF}
               variant="outline" 
               className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-3"
             >

@@ -17,6 +17,10 @@ export default defineConfig({
       : []),
   ],
   base: '/portfolio-website/', // Добавлен базовый путь для GitHub Pages
+  
+  // Добавляем поддержку PDF файлов
+  assetsInclude: ['**/*.pdf'],
+  
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -26,18 +30,22 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-  outDir: path.resolve(import.meta.dirname, "dist"),
-  emptyOutDir: true,
-  rollupOptions: {
-    output: {
-      assetFileNames: (assetInfo) => {
-        // Если это изображение из public/assets, сохраняем структуру папок
-        if (assetInfo.name && (assetInfo.name.endsWith('.jpg') || assetInfo.name.endsWith('.JPG') || assetInfo.name.endsWith('.png'))) {
-          return 'assets/[name][extname]';
+    outDir: path.resolve(import.meta.dirname, "dist"),
+    emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          // Если это PDF файл
+          if (assetInfo.name && assetInfo.name.endsWith('.pdf')) {
+            return 'documents/[name][extname]';
+          }
+          // Если это изображение из public/assets, сохраняем структуру папок
+          if (assetInfo.name && (assetInfo.name.endsWith('.jpg') || assetInfo.name.endsWith('.JPG') || assetInfo.name.endsWith('.png'))) {
+            return 'assets/[name][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
         }
-        return 'assets/[name]-[hash][extname]';
       }
     }
-  }
-},
+  },
 });

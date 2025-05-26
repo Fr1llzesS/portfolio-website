@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 interface SectionBackgroundProps {
   imageSrc: string;
@@ -12,39 +12,23 @@ export default function SectionBackground({
   opacity = 0.1, 
   className = "" 
 }: SectionBackgroundProps) {
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
+  const [showImage, setShowImage] = useState(false);
   
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Показываем изображение когда секция видна
-        // И НЕ скрываем его когда секция не видна
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-        // Убираем строку, которая скрывала изображение
-      },
-      { 
-        threshold: 0.05, // Срабатывает когда хотя бы 5% секции видно
-        rootMargin: '100px' // Срабатывает заранее
-      }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
+    // Простая задержка перед показом изображения
+    const timer = setTimeout(() => {
+      setShowImage(true);
+    }, 500);
+    
+    return () => clearTimeout(timer);
   }, []);
   
   return (
     <motion.div 
-      ref={elementRef}
       className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
       initial={{ opacity: 0 }}
-      animate={{ opacity: isVisible ? 1 : 0 }}
-      transition={{ duration: 1 }}
+      animate={{ opacity: showImage ? 1 : 0 }}
+      transition={{ duration: 1.5 }}
     >
       <div 
         className="w-full h-full bg-cover bg-center"

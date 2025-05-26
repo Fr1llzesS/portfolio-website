@@ -1,27 +1,29 @@
 import SectionBackground from './section-background';
-import { getAssetPath } from '../lib/paths';
 import skillsectionImg from '../assets/skillsection.jpg';
+import { useLanguage } from '@/contexts/language-context';
 
 export default function SkillsSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="skills" className="py-16 relative">
      <SectionBackground imageSrc={skillsectionImg} opacity={0.15} />
       
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 gradient-text">
-          Навыки
+          {t('skills.title')}
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-surface p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Профессиональные навыки</h3>
+            <h3 className="text-xl font-semibold mb-4">{t('skills.technical')}</h3>
             <div className="mb-4">
               <div className="flex justify-between mb-1">
                 <span>Тахеометры/GNSS/Сканеры/Дроны</span>
                 <span>90%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '90%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '90%' }}></div>
               </div>
             </div>
             <div className="mb-4">
@@ -30,7 +32,7 @@ export default function SkillsSection() {
                 <span>85%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '85%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '85%' }}></div>
               </div>
             </div>
             <div className="mb-4">
@@ -39,7 +41,7 @@ export default function SkillsSection() {
                 <span>80%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '80%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '80%' }}></div>
               </div>
             </div>
             <div className="mb-4">
@@ -48,7 +50,7 @@ export default function SkillsSection() {
                 <span>75%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '75%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '75%' }}></div>
               </div>
             </div>
             <div className="mb-4">
@@ -57,7 +59,7 @@ export default function SkillsSection() {
                 <span>85%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '85%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '85%' }}></div>
               </div>
             </div>
             <div className="mb-4">
@@ -66,7 +68,7 @@ export default function SkillsSection() {
                 <span>80%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '80%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '80%' }}></div>
               </div>
             </div>
             <div className="mb-4">
@@ -75,7 +77,7 @@ export default function SkillsSection() {
                 <span>90%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '90%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '90%' }}></div>
               </div>
             </div>
           </div>
@@ -84,29 +86,29 @@ export default function SkillsSection() {
             <h3 className="text-xl font-semibold mb-4">Языки</h3>
             <div className="mb-4">
               <div className="flex justify-between mb-1">
-                <span>Русский (Родной)</span>
+                <span>{t('about.russian')} ({t('about.native')})</span>
                 <span>100%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '100%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '100%' }}></div>
               </div>
             </div>
             <div className="mb-4">
               <div className="flex justify-between mb-1">
-                <span>Английский (Advanced C1)</span>
+                <span>{t('about.english')} ({t('about.advanced')})</span>
                 <span>85%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '85%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '85%' }}></div>
               </div>
             </div>
             <div className="mb-4">
               <div className="flex justify-between mb-1">
-                <span>Немецкий (Elementary A1)</span>
+                <span>{t('about.german')} ({t('about.elementary')})</span>
                 <span>40%</span>
               </div>
               <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-primary-blue to-blue-400 rounded-full" style={{ width: '40%' }}></div>
+                <div className="h-full bg-gradient-to-r from-blue-500 to-green-400 rounded-full" style={{ width: '40%' }}></div>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 // Утилита для правильного определения путей к ресурсам
 export function getAssetPath(path: string): string {
-  // Просто возвращаем путь как есть, так как base уже настроен в vite.config.ts
-  return path;
+  // Убираем любые упоминания public из пути
+  const cleanPath = path.replace('/public', '').replace('./public', '');
+  return cleanPath;
 }

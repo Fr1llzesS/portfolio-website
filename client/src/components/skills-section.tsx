@@ -1,10 +1,11 @@
 import SectionBackground from './section-background';
 import { getAssetPath } from '../lib/paths';
+import skillsectionImg from '../assets/skillsection.jpg';
 
 export default function SkillsSection() {
   return (
     <section id="skills" className="py-16 relative">
-     <SectionBackground imageSrc={getAssetPath("../public/assets/skillsection.jpg")} opacity={0.15} />
+     <SectionBackground imageSrc={skillsectionImg} opacity={0.15} />
       
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 gradient-text">

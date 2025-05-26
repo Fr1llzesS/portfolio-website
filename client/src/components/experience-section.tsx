@@ -1,10 +1,11 @@
 import SectionBackground from './section-background';
 import { getAssetPath } from '../lib/paths';
+import expsectionImg from '../assets/expsection.jpg';
 
 export default function ExperienceSection() {
   return (
     <section id="experience" className="py-16 relative">
-      <SectionBackground imageSrc={getAssetPath("/assets/expsection.JPG")} opacity={0.2} />
+      <SectionBackground imageSrc={expsectionImg} opacity={0.15} />
       
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold mb-8 gradient-text">

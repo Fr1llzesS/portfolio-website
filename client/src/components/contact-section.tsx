@@ -22,25 +22,36 @@ export default function ContactSection() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  // Обработчик отправки формы
+  // Обработчик отправки формы через Formspree
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch("/api/contact", {
+      // Формируем данные для Formspree
+      const formspreeData = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        _subject: `Новое сообщение от ${formData.name}: ${formData.subject}`
+      };
+
+      // ЗАМЕНИТЕ YOUR_FORM_ID на ваш настоящий Form ID из Formspree
+      const response = await fetch("https://formspree.io/f/xeogbpya", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        headers: { 
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formspreeData)
       });
 
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: "", email: "", subject: "", message: "" });
-        
-        // Скрыть сообщение об успехе через 3 секунды
-        setTimeout(() => setSubmitStatus('idle'), 3000);
+        setTimeout(() => setSubmitStatus('idle'), 5000);
       } else {
         setSubmitStatus('error');
       }
@@ -101,12 +112,12 @@ export default function ContactSection() {
               {/* Сообщения о статусе */}
               {submitStatus === 'success' && (
                 <div className="mb-4 p-3 bg-green-600 text-white rounded-lg">
-                  ✅ Сообщение успешно отправлено!
+                  ✅ Сообщение успешно отправлено на email!
                 </div>
               )}
               {submitStatus === 'error' && (
                 <div className="mb-4 p-3 bg-red-600 text-white rounded-lg">
-                  ❌ Ошибка отправки. Попробуйте еще раз.
+                  ❌ Ошибка отправки. Проверьте подключение к интернету и попробуйте еще раз.
                 </div>
               )}
 
@@ -114,6 +125,7 @@ export default function ContactSection() {
                 <div>
                   <input 
                     type="text" 
+                    name="name"
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     placeholder={t('contact.name_placeholder')}
@@ -124,6 +136,7 @@ export default function ContactSection() {
                 <div>
                   <input 
                     type="email" 
+                    name="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     placeholder="Email"
@@ -134,6 +147,7 @@ export default function ContactSection() {
                 <div>
                   <input 
                     type="text" 
+                    name="subject"
                     value={formData.subject}
                     onChange={(e) => handleInputChange('subject', e.target.value)}
                     placeholder={t('contact.subject_placeholder')}
@@ -144,6 +158,7 @@ export default function ContactSection() {
                 <div>
                   <textarea 
                     rows={4}
+                    name="message"
                     value={formData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
                     placeholder={t('contact.message_placeholder')}

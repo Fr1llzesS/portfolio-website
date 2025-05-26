@@ -9,7 +9,7 @@ interface SectionBackgroundProps {
 
 export default function SectionBackground({ 
   imageSrc, 
-  opacity = 0.6, 
+  opacity = 0.1, 
   className = "" 
 }: SectionBackgroundProps) {
   const [showImage, setShowImage] = useState(false);
@@ -26,10 +26,10 @@ export default function SectionBackground({
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3 && !hasShown.current) {
           setShowImage(true);
           hasShown.current = true;
-		  observer.disconnect(); // Отключаем после первого показа
+          observer.disconnect();
         }
       },
       {
@@ -38,33 +38,56 @@ export default function SectionBackground({
       }
     );
 
-    observer.observe(section);
+    if (hasShown.current) {
+      setShowImage(true);
+    } else {
+      observer.observe(section);
+    }
 
     return () => {
       observer.disconnect();
     };
   }, []);
 
-  // Принудительно сохраняем изображение видимым после первого показа
   useEffect(() => {
-    if (hasShown.current) {
+    if (hasShown.current && !showImage) {
       setShowImage(true);
     }
-  });
+  }, [showImage]);
   
-  return (
+  return hasShown.current ? (
+    // Статичный div после первого показа - НЕ ИСЧЕЗАЕТ
+    <div 
+      ref={elementRef}
+      className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
+      style={{ 
+        display: 'block',
+        visibility: 'visible',
+        opacity: 1
+      }}
+    >
+      <div 
+        className="w-full h-full bg-cover bg-center"
+        style={{ 
+          backgroundImage: `url(${imageSrc})`,
+          opacity: opacity,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-800/20 to-dark-900/40" />
+    </div>
+  ) : (
+    // Анимированный div только для первого показа
     <motion.div 
-  ref={elementRef}
-  className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
-  initial={{ opacity: 0 }}
-  animate={{ opacity: hasShown.current ? 1 : (showImage ? 1 : 0) }}
-  transition={{ duration: hasShown.current ? 0 : 0.8 }}
-  style={{ 
-    display: 'block',
-    visibility: hasShown.current ? 'visible' : (showImage ? 'visible' : 'hidden'),
-    opacity: hasShown.current ? 1 : undefined  // Принудительно фиксируем opacity после первого показа
-  }}
->
+      ref={elementRef}
+      className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: showImage ? 1 : 0 }}
+      transition={{ duration: 0.8 }}
+      style={{ 
+        display: 'block',
+        visibility: showImage ? 'visible' : 'hidden'
+      }}
+    >
       <div 
         className="w-full h-full bg-cover bg-center"
         style={{ 

@@ -55,7 +55,6 @@ export default function SectionBackground({
   return (
     <motion.div 
       ref={elementRef}
-      className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: hasShown.current ? 1 : (showImage ? 1 : 0) }}
       transition={{ duration: 0.8 }}

@@ -22,14 +22,51 @@ export default function ContactSection() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  // Обработчик отправки формы через Formspree
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Обработчик отправки в Telegram
+  const handleTelegramSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setSubmitStatus('idle');
 
     try {
-      // Формируем данные для Formspree
+      const telegramData = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      };
+
+      const response = await fetch("https://effulgent-kulfi-201938.netlify.app/.netlify/functions/send-telegram", {
+        method: "POST",
+        headers: { 
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(telegramData)
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitStatus('idle'), 5000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending to Telegram:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Обработчик отправки на Email через Formspree
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus('idle');
+
+    try {
       const formspreeData = {
         name: formData.name,
         email: formData.email,
@@ -56,7 +93,7 @@ export default function ContactSection() {
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error('Error sending to email:', error);
       setSubmitStatus('error');
     } finally {
       setIsLoading(false);
@@ -112,7 +149,7 @@ export default function ContactSection() {
               {/* Сообщения о статусе */}
               {submitStatus === 'success' && (
                 <div className="mb-4 p-3 bg-green-600 text-white rounded-lg">
-                  ✅ Сообщение успешно отправлено на email!
+                  ✅ Сообщение успешно отправлено!
                 </div>
               )}
               {submitStatus === 'error' && (
@@ -121,7 +158,7 @@ export default function ContactSection() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form className="space-y-4">
                 <div>
                   <input 
                     type="text" 
@@ -166,14 +203,29 @@ export default function ContactSection() {
                     required
                   ></textarea>
                 </div>
-                <button 
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full bg-primary-blue hover:bg-blue-600 disabled:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
-                >
-                  <Send className="w-4 h-4 mr-2" />
-                  {isLoading ? 'Отправка...' : t('contact.send_message')}
-                </button>
+                
+                {/* Две кнопки для выбора способа отправки */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button 
+                    type="button"
+                    onClick={handleEmailSubmit}
+                    disabled={isLoading}
+                    className="w-full bg-secondary-green hover:bg-green-600 disabled:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    {isLoading ? 'Отправка...' : 'Email'}
+                  </button>
+                  
+                  <button 
+                    type="button"
+                    onClick={handleTelegramSubmit}
+                    disabled={isLoading}
+                    className="w-full bg-primary-blue hover:bg-blue-600 disabled:bg-gray-600 text-white py-3 px-4 rounded-lg transition-colors flex items-center justify-center"
+                  >
+                    <Send className="w-4 h-4 mr-2" />
+                    {isLoading ? 'Отправка...' : 'Telegram'}
+                  </button>
+                </div>
               </form>
             </div>
           </div>

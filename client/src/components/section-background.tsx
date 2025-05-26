@@ -14,78 +14,42 @@ export default function SectionBackground({
 }: SectionBackgroundProps) {
   const [showImage, setShowImage] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hasShown = useRef(false);
   
   useEffect(() => {
-    const checkSectionVisibility = () => {
-      if (!elementRef.current) return false;
-      
-      const section = elementRef.current.closest('section');
-      if (!section) return false;
-      
-      const rect = section.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Вычисляем, какая часть секции видна
-      const visibleTop = Math.max(0, rect.top);
-      const visibleBottom = Math.min(viewportHeight, rect.bottom);
-      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-      const sectionHeight = rect.height;
-      
-      // Процент видимой части секции
-      const visibilityPercentage = (visibleHeight / sectionHeight) * 100;
-      
-      return visibilityPercentage >= 40;
-    };
-    
-    const handleVisibilityChange = () => {
-      const isVisible = checkSectionVisibility();
-      
-      if (isVisible) {
-        // Секция видна на 40% или больше - показываем изображение
-        setShowImage(true);
-        
-        // Отменяем таймер скрытия, если он был запущен
-        if (hideTimeoutRef.current) {
-          clearTimeout(hideTimeoutRef.current);
-          hideTimeoutRef.current = null;
+    const currentElement = elementRef.current;
+    if (!currentElement) return;
+
+    const section = currentElement.closest('section');
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+          setShowImage(true);
+          hasShown.current = true;
         }
-      } else {
-        // Секция видна меньше чем на 40% - запускаем таймер скрытия на 7 секунд
-        if (showImage && !hideTimeoutRef.current) {
-          hideTimeoutRef.current = setTimeout(() => {
-            // Дополнительная проверка перед скрытием
-            if (!checkSectionVisibility()) {
-              setShowImage(false);
-            }
-            hideTimeoutRef.current = null;
-          }, 7000);
-        }
+      },
+      {
+        threshold: [0.3, 0.5, 0.7],
+        rootMargin: '0px'
       }
-    };
-    
-    // Первоначальная проверка
-    handleVisibilityChange();
-    
-    // Оптимизированное отслеживание прокрутки
-    let animationFrameId: number;
-    const throttledCheck = () => {
-      cancelAnimationFrame(animationFrameId);
-      animationFrameId = requestAnimationFrame(handleVisibilityChange);
-    };
-    
-    window.addEventListener('scroll', throttledCheck, { passive: true });
-    window.addEventListener('resize', throttledCheck, { passive: true });
-    
+    );
+
+    observer.observe(section);
+
     return () => {
-      window.removeEventListener('scroll', throttledCheck);
-      window.removeEventListener('resize', throttledCheck);
-      cancelAnimationFrame(animationFrameId);
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
+      observer.disconnect();
     };
-  }, [showImage]);
+  }, []);
+
+  // Принудительно сохраняем изображение видимым после первого показа
+  useEffect(() => {
+    if (hasShown.current) {
+      setShowImage(true);
+    }
+  });
   
   return (
     <motion.div 
@@ -94,6 +58,11 @@ export default function SectionBackground({
       initial={{ opacity: 0 }}
       animate={{ opacity: showImage ? 1 : 0 }}
       transition={{ duration: 0.8 }}
+      style={{ 
+        // Принудительное сохранение в DOM
+        display: 'block',
+        visibility: showImage ? 'visible' : 'hidden'
+      }}
     >
       <div 
         className="w-full h-full bg-cover bg-center"

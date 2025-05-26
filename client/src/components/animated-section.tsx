@@ -23,16 +23,17 @@ export default function AnimatedSection({ id, children, className = "py-16" }: A
   const smoothY = useSpring(y, { stiffness: 50, damping: 15 });
   const smoothOpacity = useSpring(opacity, { stiffness: 50, damping: 15 });
   
-return (
-  <section id={id} ref={sectionRef} className={`${className} relative`}>
-    <motion.div
-      style={{ 
-        opacity: smoothOpacity,
-        y: smoothY,
-      }}
-      className="relative z-10"
-    >
-      {children}
-    </motion.div>
-  </section>
-);
+  return (
+    <section id={id} ref={sectionRef} className={`${className} relative`}>
+      <motion.div
+        style={{ 
+          opacity: smoothOpacity,
+          y: smoothY,
+        }}
+        className="relative z-10"
+      >
+        {children}
+      </motion.div>
+    </section>
+  );
+}

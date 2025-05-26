@@ -12,21 +12,22 @@ export default function SectionBackground({
   opacity = 0.1, 
   className = "" 
 }: SectionBackgroundProps) {
-  const [hasBeenVisible, setHasBeenVisible] = useState(false);
-  const [isCurrentlyVisible, setIsCurrentlyVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsCurrentlyVisible(entry.isIntersecting);
-        if (entry.isIntersecting && !hasBeenVisible) {
-          setHasBeenVisible(true);
+        // Показываем изображение когда секция видна
+        // И НЕ скрываем его когда секция не видна
+        if (entry.isIntersecting) {
+          setIsVisible(true);
         }
+        // Убираем строку, которая скрывала изображение
       },
       { 
-        threshold: 0.1,
-        rootMargin: '50px'
+        threshold: 0.05, // Срабатывает когда хотя бы 5% секции видно
+        rootMargin: '100px' // Срабатывает заранее
       }
     );
 
@@ -35,20 +36,14 @@ export default function SectionBackground({
     }
 
     return () => observer.disconnect();
-  }, [hasBeenVisible]);
-  
-  // Показываем изображение если:
-  // 1. Оно уже было видно хотя бы раз И сейчас в области просмотра
-  // ИЛИ
-  // 2. Оно сейчас в области просмотра (для первого показа)
-  const shouldShowImage = (hasBeenVisible && isCurrentlyVisible) || isCurrentlyVisible;
+  }, []);
   
   return (
     <motion.div 
       ref={elementRef}
       className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
       initial={{ opacity: 0 }}
-      animate={{ opacity: shouldShowImage ? 1 : 0 }}
+      animate={{ opacity: isVisible ? 1 : 0 }}
       transition={{ duration: 1 }}
     >
       <div 

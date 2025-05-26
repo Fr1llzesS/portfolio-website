@@ -9,7 +9,7 @@ interface SectionBackgroundProps {
 
 export default function SectionBackground({ 
   imageSrc, 
-  opacity = 0.1, 
+  opacity = 0.6, 
   className = "" 
 }: SectionBackgroundProps) {
   const [showImage, setShowImage] = useState(false);

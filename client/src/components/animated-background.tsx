@@ -13,10 +13,10 @@ export default function AnimatedBackground() {
     canvas.width = width;
     canvas.height = height;
 
-    // Уменьшаем количество частиц
-    const particleCount = 60; // было 50
+    // Увеличиваем количество частиц для более оживленного фона
+    const particleCount = 50; // было 20
     const particles = [];
-    const connectionDistance = 90; // было 150
+    const connectionDistance = 80; // было 120 - уменьшаем для больше соединений
     const moveSpeed = 0.3; // было 0.5
 
     // Создаем частицы
@@ -51,9 +51,9 @@ export default function AnimatedBackground() {
         ctx.fill();
       });
       
-      // Оптимизируем рисование соединений
+      // Увеличиваем количество соединений для более плотной сети
       for (let i = 0; i < particles.length; i++) {
-        // Рисуем соединения только с ближайшими частицами
+        // Рисуем соединения с большим количеством ближайших частиц
         for (let j = i + 1; j < Math.min(i + 8, particles.length); j++) { // было i + 5
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;

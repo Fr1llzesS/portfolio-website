@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
 interface SectionBackgroundProps {
   imageSrc: string;
@@ -12,18 +11,6 @@ export default function SectionBackground({
   opacity = 0.1, 
   className = "" 
 }: SectionBackgroundProps) {
-  const [loaded, setLoaded] = useState(true);
-  
-  useEffect(() => {
-    const img = new Image();
-    img.src = imageSrc;
-    img.onload = () => setLoaded(true);
-    img.onerror = () => {
-      // В случае ошибки, попробуем альтернативный путь
-      console.log("Не удалось загрузить изображение:", imageSrc);
-    };
-  }, [imageSrc]);
-  
   
   return (
     <motion.div 
@@ -31,7 +18,7 @@ export default function SectionBackground({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      viewport={{ once: false }} // чтобы анимация не исчезала
+      viewport={{ once: false }} // изменено с true на false
     >
       <div 
         className="w-full h-full bg-cover bg-center"
@@ -40,7 +27,7 @@ export default function SectionBackground({
           opacity: opacity,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-dark/80 to-dark/95" />
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-800/20 to-dark-900/40" />
     </motion.div>
   );
 }

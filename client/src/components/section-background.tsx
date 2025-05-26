@@ -79,7 +79,7 @@ export default function SectionBackground({
     // Анимированный div только для первого показа
     <motion.div 
       ref={elementRef}
-      className={`absolute inset-0 -z-10 overflow-hidden ${className}`}
+      className={`absolute inset-0 -z-20 overflow-hidden ${className}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: showImage ? 1 : 0 }}
       transition={{ duration: 0.8 }}

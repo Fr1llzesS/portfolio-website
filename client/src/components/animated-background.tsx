@@ -14,10 +14,10 @@ export default function AnimatedBackground() {
     canvas.height = height;
 
     // Увеличиваем количество частиц для более оживленного фона
-    const particleCount = 50; // было 20
+    const particleCount = 80; // было 20
     const particles = [];
-    const connectionDistance = 80; // было 120 - уменьшаем для больше соединений
-    const moveSpeed = 0.3; // было 0.5
+    const connectionDistance = 60; // было 120 - уменьшаем для больше соединений
+    const moveSpeed = 0.45; // было 0.5
 
     // Создаем частицы
     for (let i = 0; i < particleCount; i++) {

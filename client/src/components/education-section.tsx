@@ -121,13 +121,13 @@ export default function EducationSection() {
                       <div className="flex items-center gap-3 mb-3">
                         <h3 className="text-xl lg:text-2xl font-bold text-slate-100">{t('education.university')}</h3>
                         <div className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-medium rounded-full border border-blue-500/30">
-                          В планах
+                          Планируется
                         </div>
                       </div>
                       <div className="flex items-center gap-4 text-slate-400 mb-6">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
-                          <span className="text-sm">2026-2030</span>
+                          <span className="text-sm">2025-....</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <MapPin className="w-4 h-4" />
@@ -143,7 +143,7 @@ export default function EducationSection() {
                       </h4>
                       <div className="text-slate-400 text-base leading-relaxed">
                         <p className="mb-2">Будет определена при поступлении</p>
-                        <p className="text-sm">Планируется углубленное изучение современных технологий</p>
+                        <p className="text-sm">Планируется поступление на специализацию ОГР</p>
                       </div>
                     </Card>
                   </div>

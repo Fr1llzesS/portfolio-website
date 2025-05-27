@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { GraduationCap, Eye, X, BookOpen, Star, Calendar, MapPin } from "lucide-react";
+import { GraduationCap, Eye, X, BookOpen, Calendar, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import diplomaImage from '../assets/diploma.jpg';
 
@@ -54,7 +54,7 @@ export default function EducationSection() {
           {/* Новая сетка без absolute позиционирования */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             
-            {/* Первая карточка - Колледж */}
+            {/* Первая карточка - Колледж (БЕЗ ЗВЕЗД) */}
             <div className="w-full">
               <Card className="bg-surface p-8 border-slate-700 shadow-2xl hover:shadow-secondary-green/10 transition-all duration-300 h-full">
                 <div className="flex items-start space-x-6">
@@ -69,11 +69,7 @@ export default function EducationSection() {
                       <div>
                         <div className="flex items-center gap-3 mb-3">
                           <h3 className="text-xl lg:text-2xl font-bold text-slate-100">{t('education.college')}</h3>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          </div>
+                          {/* ЗВЕЗДЫ УБРАНЫ */}
                         </div>
                         <p className="text-secondary-green font-semibold mb-3 text-lg">{t('education.major')}</p>
                         <div className="flex items-center gap-4 text-slate-400 mb-6">

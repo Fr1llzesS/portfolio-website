@@ -9,10 +9,14 @@ import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import AnimatedSection from "@/components/animated-section";
 import AnimatedBackground from "@/components/animated-background";
+import SEOSchema from "@/components/seo-schema";
 
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-dark text-slate-50 relative">
+	 {/* SEO Schema для маркшейдера */}
+      <SEOSchema />
+	  
       {/* Анимированный фон только для первого экрана */}
       <div className="absolute inset-0 z-0 h-screen overflow-hidden">
         <AnimatedBackground />

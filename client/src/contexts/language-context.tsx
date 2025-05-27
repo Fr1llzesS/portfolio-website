@@ -55,6 +55,8 @@ const translations = {
     'education.form': '2025 • Очная форма обучения',
     'education.specialization': 'Специализация:',
     'education.engineer': 'Горный инженер-маркшейдер',
+	'education.view_diploma': 'Просмотр диплома',
+	'education.diploma_title': 'Диплом об образовании',
     
     // Skills Section
     'skills.title': 'Профессиональные навыки',
@@ -161,6 +163,8 @@ const translations = {
     'education.form': '2025 • Full-time study',
     'education.specialization': 'Specialization:',
     'education.engineer': 'Mining Engineer-Surveyor',
+	'education.view_diploma': 'View Diploma',
+	'education.diploma_title': 'Education Diploma',
     
     // Skills Section
     'skills.title': 'Professional Skills',

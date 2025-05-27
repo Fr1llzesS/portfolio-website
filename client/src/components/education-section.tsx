@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { GraduationCap, Eye, X, BookOpen, Award } from "lucide-react";
+import { GraduationCap, Eye, X, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import diplomaImage from '../assets/diploma.jpg';
 
@@ -43,9 +43,9 @@ export default function EducationSection() {
             <span className="gradient-text">{t('education.title')}</span>
           </h2>
           
-          <div className="relative min-h-[600px]">
-            {/* Первое окно - Колледж (верхний левый) */}
-            <div className="absolute top-0 left-0 w-full max-w-md lg:max-w-lg z-10">
+          <div className="relative min-h-[700px]">
+            {/* Первое окно - Колледж (левее) */}
+            <div className="absolute top-0 left-0 lg:-left-12 w-full max-w-md lg:max-w-lg z-10">
               <Card className="bg-surface p-6 lg:p-8 border-slate-700">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
@@ -81,8 +81,8 @@ export default function EducationSection() {
               </Card>
             </div>
 
-            {/* Второе окно - ВУЗ (нижний центр) */}
-            <div className="absolute top-48 left-1/2 transform -translate-x-1/2 lg:top-64 lg:left-80 lg:translate-x-0 w-full max-w-md lg:max-w-lg z-10">
+            {/* Второе окно - ВУЗ (ниже и правее) */}
+            <div className="absolute top-80 left-1/2 transform -translate-x-1/2 lg:top-96 lg:left-96 lg:translate-x-0 w-full max-w-md lg:max-w-lg z-10">
               <Card className="bg-surface p-6 lg:p-8 border-slate-700">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
@@ -94,21 +94,19 @@ export default function EducationSection() {
                   <div className="flex-1">
                     <div className="mb-4">
                       <h3 className="text-lg lg:text-xl font-semibold mb-2 text-slate-100">{t('education.university')}</h3>
-                      <p className="text-secondary-green font-medium mb-2 text-sm lg:text-base">{t('education.university_major')}</p>
-                      <p className="text-muted mb-4 text-sm">{t('education.university_form')}</p>
                     </div>
                     
                     <Card className="bg-dark p-4">
                       <h4 className="font-medium mb-3 text-slate-100 text-sm">{t('education.university_specialization')}</h4>
-                      <p className="text-slate-300 text-sm">{t('education.university_degree')}</p>
+                      <p className="text-slate-300 text-sm"></p>
                     </Card>
                   </div>
                 </div>
               </Card>
             </div>
 
-            {/* Третье окно - Дополнительное образование (правый верх) */}
-            <div className="absolute top-0 right-0 w-full max-w-xs lg:max-w-sm z-10 mt-96 lg:mt-0">
+            {/* Третье окно - Дополнительное образование (правый верх, пустое) */}
+            <div className="absolute top-0 right-0 lg:-right-12 w-full max-w-xs lg:max-w-sm z-10 mt-96 lg:mt-0">
               <Card className="bg-surface p-4 lg:p-6 border-slate-700">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
@@ -119,41 +117,9 @@ export default function EducationSection() {
                   </h3>
                 </div>
 
-                <div className="space-y-4">
-                  {/* Курсы и сертификации */}
-                  <div>
-                    <h4 className="text-xs lg:text-sm font-medium text-slate-100 flex items-center gap-2 mb-3">
-                      <Award className="w-3 h-3 lg:w-4 lg:h-4 text-secondary-green" />
-                      {t('education.courses_certifications')}
-                    </h4>
-                    <div className="space-y-2">
-                      <div className="bg-dark p-2 lg:p-3 rounded-lg">
-                        <p className="text-xs text-slate-300">{t('education.course_1')}</p>
-                      </div>
-                      <div className="bg-dark p-2 lg:p-3 rounded-lg">
-                        <p className="text-xs text-slate-300">{t('education.course_2')}</p>
-                      </div>
-                      <div className="bg-dark p-2 lg:p-3 rounded-lg">
-                        <p className="text-xs text-slate-300">{t('education.course_3')}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Профессиональное развитие */}
-                  <div>
-                    <h4 className="text-xs lg:text-sm font-medium text-slate-100 flex items-center gap-2 mb-3">
-                      <Award className="w-3 h-3 lg:w-4 lg:h-4 text-secondary-green" />
-                      {t('education.professional_development')}
-                    </h4>
-                    <div className="space-y-2">
-                      <div className="bg-dark p-2 lg:p-3 rounded-lg">
-                        <p className="text-xs text-slate-300">{t('education.development_1')}</p>
-                      </div>
-                      <div className="bg-dark p-2 lg:p-3 rounded-lg">
-                        <p className="text-xs text-slate-300">{t('education.development_2')}</p>
-                      </div>
-                    </div>
-                  </div>
+                {/* Пустое содержимое - пользователь добавит позже */}
+                <div className="space-y-4 min-h-[200px]">
+                  {/* Содержимое будет добавлено пользователем */}
                 </div>
               </Card>
             </div>

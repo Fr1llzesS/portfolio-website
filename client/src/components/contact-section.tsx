@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SectionBackground from './section-background';
-import contactsectionImg from '../assets/contactssection.jpg';
+import contactsectionImg from '@/assets/contactssection.jpg';
 import { useLanguage } from '@/contexts/language-context';
 import { Phone, Mail, MapPin, Send, MessageSquare, User, AtSign, FileText } from 'lucide-react';
 

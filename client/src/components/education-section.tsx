@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { GraduationCap, Eye, X } from "lucide-react";
+import { GraduationCap, Eye, X, Award, BookOpen } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import diplomaImage from '../assets/diploma.jpg'; // Поместите изображение диплома сюда
 
@@ -44,76 +44,111 @@ export default function EducationSection() {
             <span className="gradient-text">{t('education.title')}</span>
           </h2>
           
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-surface p-8 border-slate-700">
-              <div className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary-green rounded-lg flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2 text-slate-100">{t('education.college')}</h3>
-                      <p className="text-secondary-green font-medium mb-2">{t('education.major')}</p>
-                      <p className="text-muted mb-4">{t('education.form')}</p>
+          <div className="relative">
+            {/* Основное образование - левая верхняя позиция */}
+            <div className="w-full max-w-2xl">
+              <Card className="bg-surface p-8 border-slate-700">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary-green rounded-lg flex items-center justify-center">
+                      <GraduationCap className="w-6 h-6 text-white" />
                     </div>
-                    
-                    {/* Кнопка просмотра диплома */}
-                    <button
-                      onClick={viewDiploma}
-                      className="flex items-center gap-2 px-4 py-2 bg-secondary-green hover:bg-green-600 text-white rounded-lg transition-colors text-sm font-medium whitespace-nowrap"
-                    >
-                      <Eye className="w-4 h-4" />
-                      {t('education.view_diploma')}
-                    </button>
                   </div>
                   
-                  <Card className="bg-dark p-4">
-                    <h4 className="font-medium mb-3 text-slate-100">{t('education.specialization')}</h4>
-                    <p className="text-slate-300">{t('education.engineer')}</p>
-                  </Card>
+                  <div className="flex-1">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-slate-100">{t('education.college')}</h3>
+                        <p className="text-secondary-green font-medium mb-2">{t('education.major')}</p>
+                        <p className="text-muted mb-4">{t('education.form')}</p>
+                      </div>
+                      
+                      {/* Кнопка просмотра диплома */}
+                      <button
+                        onClick={viewDiploma}
+                        className="flex items-center gap-2 px-4 py-2 bg-secondary-green hover:bg-green-600 text-white rounded-lg transition-colors text-sm font-medium whitespace-nowrap"
+                      >
+                        <Eye className="w-4 h-4" />
+                        {t('education.view_diploma')}
+                      </button>
+                    </div>
+                    
+                    <Card className="bg-dark p-4">
+                      <h4 className="font-medium mb-3 text-slate-100">{t('education.specialization')}</h4>
+                      <p className="text-slate-300">{t('education.engineer')}</p>
+                    </Card>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </div>
 
-            {/* Дополнительная секция внизу (как на вашем макете) */}
-            <div className="mt-6">
-              <Card className="bg-surface p-6 border-slate-700">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Левая часть - дополнительная информация */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-slate-100">
+            {/* Секция дополнительного образования - диагональное размещение */}
+            <div className="mt-8 ml-auto max-w-3xl relative">
+              {/* Декоративная линия */}
+              <div className="absolute -top-4 -left-32 w-24 h-px bg-gradient-to-r from-transparent to-secondary-green transform rotate-45 hidden lg:block"></div>
+              
+              <Card className="bg-surface p-6 border-slate-700 transform lg:translate-x-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                    <BookOpen className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-100">
+                    {t('education.additional_title')}
+                  </h3>
+                </div>
+
+                {/* Диагональная сетка для содержимого */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Левая колонка - смещена вниз */}
+                  <div className="space-y-4 lg:mt-8">
+                    <h4 className="text-base font-medium text-slate-100 flex items-center gap-2">
+                      <Award className="w-4 h-4 text-secondary-green" />
                       {t('education.additional_info')}
                     </h4>
-                    <div className="space-y-2">
-                      <p className="text-slate-300">
-                        <span className="text-secondary-green font-medium">{t('education.qualification')}:</span> {t('education.qualification_level')}
-                      </p>
-                      <p className="text-slate-300">
-                        <span className="text-secondary-green font-medium">{t('education.duration')}:</span> {t('education.study_duration')}
-                      </p>
-                      <p className="text-slate-300">
-                        <span className="text-secondary-green font-medium">{t('education.graduation')}:</span> {t('education.graduation_year')}
-                      </p>
+                    <div className="space-y-3">
+                      <div className="bg-dark p-3 rounded-lg transform lg:-rotate-1">
+                        <p className="text-sm text-slate-300">
+                          <span className="text-secondary-green font-medium">{t('education.qualification')}:</span> {t('education.qualification_level')}
+                        </p>
+                      </div>
+                      <div className="bg-dark p-3 rounded-lg transform lg:rotate-1">
+                        <p className="text-sm text-slate-300">
+                          <span className="text-secondary-green font-medium">{t('education.duration')}:</span> {t('education.study_duration')}
+                        </p>
+                      </div>
+                      <div className="bg-dark p-3 rounded-lg transform lg:-rotate-1">
+                        <p className="text-sm text-slate-300">
+                          <span className="text-secondary-green font-medium">{t('education.graduation')}:</span> {t('education.graduation_year')}
+                        </p>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Правая часть - достижения или сертификаты */}
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-slate-100">
+                  {/* Правая колонка - смещена вверх */}
+                  <div className="space-y-4 lg:-mt-4">
+                    <h4 className="text-base font-medium text-slate-100 flex items-center gap-2">
+                      <Award className="w-4 h-4 text-secondary-green" />
                       {t('education.achievements')}
                     </h4>
-                    <div className="space-y-2">
-                      <p className="text-slate-300">{t('education.achievement_1')}</p>
-                      <p className="text-slate-300">{t('education.achievement_2')}</p>
-                      <p className="text-slate-300">{t('education.achievement_3')}</p>
+                    <div className="space-y-3">
+                      <div className="bg-dark p-3 rounded-lg transform lg:rotate-1">
+                        <p className="text-sm text-slate-300">{t('education.achievement_1')}</p>
+                      </div>
+                      <div className="bg-dark p-3 rounded-lg transform lg:-rotate-1">
+                        <p className="text-sm text-slate-300">{t('education.achievement_2')}</p>
+                      </div>
+                      <div className="bg-dark p-3 rounded-lg transform lg:rotate-1">
+                        <p className="text-sm text-slate-300">{t('education.achievement_3')}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </Card>
+            </div>
+
+            {/* Декоративные элементы */}
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10 hidden lg:block">
+              <div className="w-32 h-32 border border-secondary-green transform rotate-45"></div>
             </div>
           </div>
         </div>

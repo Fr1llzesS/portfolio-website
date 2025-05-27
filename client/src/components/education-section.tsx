@@ -51,18 +51,12 @@ export default function EducationSection() {
             <span className="gradient-text">{t('education.title')}</span>
           </h2>
           
-          <div className="relative min-h-[800px]">
-            {/* Соединительные линии */}
-            <div className="absolute inset-0 pointer-events-none hidden lg:block">
-              {/* Линия от колледжа к ВУЗу */}
-              <div className="absolute top-72 left-64 w-40 h-px bg-gradient-to-r from-secondary-green to-transparent transform rotate-45 origin-left"></div>
-              {/* Линия от колледжа к доп. образованию */}
-              <div className="absolute top-32 left-80 w-32 h-px bg-gradient-to-r from-primary to-transparent transform -rotate-12 origin-left"></div>
-            </div>
-
-            {/* Первое окно - Колледж (сдвинуто левее) */}
-            <div className="absolute top-0 left-0 lg:-left-16 w-full max-w-lg lg:max-w-xl z-20">
-              <Card className="bg-surface p-8 border-slate-700 shadow-2xl hover:shadow-secondary-green/10 transition-all duration-300">
+          {/* Новая сетка без absolute позиционирования */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            
+            {/* Первая карточка - Колледж */}
+            <div className="w-full">
+              <Card className="bg-surface p-8 border-slate-700 shadow-2xl hover:shadow-secondary-green/10 transition-all duration-300 h-full">
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary-green rounded-xl flex items-center justify-center shadow-lg">
@@ -116,9 +110,9 @@ export default function EducationSection() {
               </Card>
             </div>
 
-            {/* Второе окно - ВУЗ (сдвинуто левее) */}
-            <div className="absolute top-96 left-1/2 transform -translate-x-1/2 lg:top-80 lg:left-1/3 lg:translate-x-0 w-full max-w-lg lg:max-w-xl z-20">
-              <Card className="bg-surface p-8 border-slate-700 shadow-2xl hover:shadow-primary/10 transition-all duration-300">
+            {/* Вторая карточка - ВУЗ */}
+            <div className="w-full">
+              <Card className="bg-surface p-8 border-slate-700 shadow-2xl hover:shadow-primary/10 transition-all duration-300 h-full">
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
                     <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
@@ -161,8 +155,8 @@ export default function EducationSection() {
               </Card>
             </div>
 
-            {/* Третье окно - Дополнительное образование (уменьшенное) */}
-            <div className="absolute top-0 right-0 w-full max-w-sm lg:max-w-md z-20 mt-[600px] lg:mt-0">
+            {/* Третья карточка - Дополнительное образование (на всю ширину) */}
+            <div className="lg:col-span-2">
               <Card className="bg-surface p-6 border-slate-700 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
@@ -177,7 +171,7 @@ export default function EducationSection() {
                 </div>
 
                 {/* Пустое содержимое с красивым оформлением */}
-                <div className="space-y-4 min-h-[250px]">
+                <div className="space-y-4">
                   <div className="border-2 border-dashed border-slate-600 rounded-lg p-6 text-center">
                     <div className="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-3">
                       <BookOpen className="w-5 h-5 text-slate-400" />

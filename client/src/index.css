@@ -141,3 +141,28 @@
     border-color: hsl(var(--surface));
   }
 }
+/* Стили для секции образования */
+   .education-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  position: relative;
+  isolation: isolate;
+}
+@media (min-width: 1024px) {
+  .education-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+/* Стили для карточек образования */
+.education-card {
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+.education-card:hover {
+  z-index: 10;
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+}

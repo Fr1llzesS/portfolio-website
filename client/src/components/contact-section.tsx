@@ -100,7 +100,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-dark relative overflow-hidden">
+    <section id="contact" className="py-20 bg-transperent relative overflow-hidden">
       {/* Декоративные фоновые элементы */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-32 left-16 w-48 h-48 border border-primary rounded-full"></div>

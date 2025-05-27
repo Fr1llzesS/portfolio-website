@@ -78,6 +78,43 @@ export default function EducationSection() {
                 </div>
               </div>
             </Card>
+
+            {/* Дополнительная секция внизу (как на вашем макете) */}
+            <div className="mt-6">
+              <Card className="bg-surface p-6 border-slate-700">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Левая часть - дополнительная информация */}
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-slate-100">
+                      {t('education.additional_info')}
+                    </h4>
+                    <div className="space-y-2">
+                      <p className="text-slate-300">
+                        <span className="text-secondary-green font-medium">{t('education.qualification')}:</span> {t('education.qualification_level')}
+                      </p>
+                      <p className="text-slate-300">
+                        <span className="text-secondary-green font-medium">{t('education.duration')}:</span> {t('education.study_duration')}
+                      </p>
+                      <p className="text-slate-300">
+                        <span className="text-secondary-green font-medium">{t('education.graduation')}:</span> {t('education.graduation_year')}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Правая часть - достижения или сертификаты */}
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-slate-100">
+                      {t('education.achievements')}
+                    </h4>
+                    <div className="space-y-2">
+                      <p className="text-slate-300">{t('education.achievement_1')}</p>
+                      <p className="text-slate-300">{t('education.achievement_2')}</p>
+                      <p className="text-slate-300">{t('education.achievement_3')}</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </div>

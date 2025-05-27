@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Download, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
 import resumePDF from "@/assets/documents/resume.pdf?url";
+import AnimatedBackground from './animated-background';
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,8 +30,11 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center hero-bg pt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section id="hero" className="min-h-screen flex items-center justify-center hero-bg pt-16 relative">
+      {/* Анимированный фон с соединяющимися точками */}
+      <AnimatedBackground />
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className={`fade-in ${isVisible ? 'visible' : ''}`}>
           {/* Professional avatar */}
           <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-primary to-secondary-green flex items-center justify-center text-4xl font-bold">

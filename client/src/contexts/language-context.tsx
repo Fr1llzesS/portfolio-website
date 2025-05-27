@@ -55,8 +55,25 @@ const translations = {
     'education.form': '2025 • Очная форма обучения',
     'education.specialization': 'Специализация:',
     'education.engineer': 'Горный инженер-маркшейдер',
-	'education.view_diploma': 'Просмотр диплома',
-	'education.diploma_title': 'Диплом об образовании',
+    'education.view_diploma': 'Просмотр диплома',
+    'education.diploma_title': 'Диплом об образовании',
+    
+    // ВУЗ образование
+    'education.university': 'Университет/ВУЗ',
+    'education.university_major': 'Горное дело',
+    'education.university_form': '2026-2030 • Заочная форма обучения',
+    'education.university_specialization': 'Специализация:',
+    'education.university_degree': 'Бакалавр техники и технологии',
+    
+    // Дополнительное образование
+    'education.additional_education': 'Дополнительное образование',
+    'education.courses_certifications': 'Курсы и сертификации',
+    'education.professional_development': 'Профессиональное развитие',
+    'education.course_1': 'Курсы повышения квалификации по геодезии',
+    'education.course_2': 'Сертификация по работе с геодезическим оборудованием',
+    'education.course_3': 'Курсы по охране труда в горной промышленности',
+    'education.development_1': 'Семинары по современным технологиям маркшейдерии',
+    'education.development_2': 'Тренинги по работе с профессиональным ПО',
     
     // Skills Section
     'skills.title': 'Профессиональные навыки',
@@ -163,8 +180,25 @@ const translations = {
     'education.form': '2025 • Full-time study',
     'education.specialization': 'Specialization:',
     'education.engineer': 'Mining Engineer-Surveyor',
-	'education.view_diploma': 'View Diploma',
-	'education.diploma_title': 'Education Diploma',
+    'education.view_diploma': 'View Diploma',
+    'education.diploma_title': 'Education Diploma',
+    
+    // ВУЗ образование
+    'education.university': 'University/Higher Education',
+    'education.university_major': 'Mining Engineering',
+    'education.university_form': '2026-2030 • Distance learning',
+    'education.university_specialization': 'Specialization:',
+    'education.university_degree': 'Bachelor of Engineering and Technology',
+    
+    // Дополнительное образование
+    'education.additional_education': 'Additional Education',
+    'education.courses_certifications': 'Courses and Certifications',
+    'education.professional_development': 'Professional Development',
+    'education.course_1': 'Advanced geodesy qualification courses',
+    'education.course_2': 'Certification in geodetic equipment operation',
+    'education.course_3': 'Occupational safety courses in mining industry',
+    'education.development_1': 'Seminars on modern surveying technologies',
+    'education.development_2': 'Professional software training',
     
     // Skills Section
     'skills.title': 'Professional Skills',

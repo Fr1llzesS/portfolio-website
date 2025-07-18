@@ -68,7 +68,7 @@ export default function SEOSchema() {
     "@type": "WebSite",
     "name": "Курдюмов Вячеслав - Портфолио маркшейдера",
     "alternateName": "Kurdjumov Vjacheslav - Mine Surveyor Portfolio",
-    "url": typeof window !== 'undefined' ? window.location.origin : '',
+    "url": "https://fr1llzess.github.io/portfolio-website",
     "description": "Профессиональное портфолио горного инженера-маркшейдера Курдюмова Вячеслава. Маркшейдерские работы, геодезические измерения, топографические съемки.",
     "author": {
       "@type": "Person",

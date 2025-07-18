@@ -150,7 +150,30 @@ export default function EducationSection() {
                 </div>
               </Card>
             </div>
-
+{/* Модальное окно для просмотра диплома */}
+{showDiploma && (
+  <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+    <div className="relative max-w-4xl w-full max-h-[90vh] bg-surface rounded-lg overflow-hidden">
+      {/* Кнопка закрытия */}
+      <button
+        onClick={closeDiploma}
+        className="absolute top-4 right-4 z-10 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition-colors"
+        aria-label="Закрыть"
+      >
+        <X className="w-4 h-4" />
+      </button>
+      
+      {/* Содержимое диплома */}
+      <div className="p-4">
+        <img
+          src={diplomaImage}
+          alt={t('education.diploma_title')}
+          className="w-full h-auto rounded"
+        />
+      </div>
+    </div>
+  </div>
+)}
             {/* Третья карточка - Дополнительное образование (на всю ширину) */}
             <div className="lg:col-span-2">
               <Card className="bg-surface p-6 border-slate-700 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">

@@ -166,3 +166,71 @@
   transform: translateY(-4px);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
 }
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .hero-bg {
+    padding-top: 4rem;
+  }
+  
+  /* Уменьшение отступов на мобильных */
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  /* Адаптация карточек */
+  .bg-surface {
+    margin-bottom: 1rem;
+  }
+  
+  /* Адаптация модального окна диплома */
+  .fixed.inset-0 .relative {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+  
+  /* Адаптация навигации */
+  nav {
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Адаптация кнопок */
+  .flex.flex-col.sm\\:flex-row {
+    gap: 0.75rem;
+  }
+  
+  /* Адаптация текста */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Очень маленькие экраны */
+  .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .text-4xl {
+    font-size: 1.875rem !important;
+  }
+  
+  .text-6xl {
+    font-size: 2.25rem !important;
+  }
+}
